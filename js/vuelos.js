@@ -145,6 +145,7 @@ function iniciarCalendario(fechaInicio,fechaFin,fechasDisponibles, fechaNoDispon
             dateFormat: "Y-m-d", // Formato de fecha
             minDate: fechaInicio,
             maxDate: fechaFin,
+            disableMobile: true,
             disable: fechaNoDisponible,
             onDayCreate: function(dObj, dStr, fp, dayElem) {
                 const fecha = dayElem.dateObj.toISOString().split('T')[0];
@@ -225,10 +226,7 @@ function validarRango(input) {
     const min = parseInt(input.min);
     const max = parseInt(input.max);
     let value = input.value;
-    if (value === "") {
-        input.value = min;
-        return;
-    }
+    
     value = parseInt(value, 10); // Esto elimina los ceros a la izquierda
     if (value < min) {
         input.value = min;
