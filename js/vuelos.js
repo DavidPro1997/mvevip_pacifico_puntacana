@@ -272,8 +272,8 @@ function armarArrayDatosPago(){
         "nombres": document.getElementById("nombres").value,
         "email": document.getElementById("correo").value,
         "celular": document.getElementById("celular").value,
-        // "valor": parseFloat(precio)
-        "valor": 3500
+        "valor": parseFloat(precio)
+        // "valor": 3500
         
     }
     return datos
