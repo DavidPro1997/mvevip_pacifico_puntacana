@@ -2,16 +2,17 @@ function recibirInformacion() {
     const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
     const idVerificar = urlParams.get('idVerificar');
     if (idVerificar) {
-        const id = parseInt(localStorage.getItem('idVerificar'))
-        const datosCliente = JSON.parse(localStorage.getItem("datosCliente"))
-        armarDom(datosCliente)
-        verificarPago(id)
+        console.log("Hola")
+        // const id = parseInt(localStorage.getItem('idVerificar'))
+        // const datosCliente = JSON.parse(localStorage.getItem("datosCliente"))
+        // armarDom(datosCliente)
+        // verificarPago(id)
     }
     else{
         scrollTop()
         escogerSalida('UIO - Quito - Mariscal Sucre - Ecuador',5)
-        localStorage.removeItem('idVerificar');
-        localStorage.removeItem('datosCliente');
+        // localStorage.removeItem('idVerificar');
+        // localStorage.removeItem('datosCliente');
     }
 }
 
