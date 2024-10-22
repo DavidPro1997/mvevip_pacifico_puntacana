@@ -319,33 +319,50 @@ function recibirCotizacion(id){
     localStorage.setItem("fechaSalida",fechaBuscada)
     localStorage.setItem("lugarSalida",lugarSalida)
     let objeto = fechasGlobales.find(item => item.fecha === fechaBuscada);
-    const date = armarArrayDatos()
-    Enviar(JSON.stringify(date), 'leads/consulta-itinerario/'+objeto.id, datos => {
-        if (datos.estado) {
-            precio = datos.consulta.precio.totalPaquete.valor
-            ponerCosto(datos.consulta.precio)
-            armarVuelos(datos.consulta.origen, datos.consulta.destino,datos.consulta.salida,datos.consulta.retorno)
-            $("#detalles").show()
-            if(id){
+    if(validarDatos()){
+        const date = armarArrayDatos()
+        Enviar(JSON.stringify(date), 'leads/consulta-itinerario/'+objeto.id, datos => {
+            if (datos.estado) {
+                precio = datos.consulta.precio.totalPaquete.valor
+                ponerCosto(datos.consulta.precio)
+                armarVuelos(datos.consulta.origen, datos.consulta.destino,datos.consulta.salida,datos.consulta.retorno)
+                $("#detalles").show()
+                if(id){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Consulta realizada',
+                        text: '¡Revisa tu paquete!'
+                    })
+                }
+                
+            }
+            else{
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Consulta realizada',
-                    text: '¡Revisa tu paquete!'
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: datos.error
                 })
             }
             
-        }
-        else{
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: datos.error
-            })
-        }
-        
-    })
+        })
+    }
+    else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Ingrese un nombre o apellido válido'
+        })
+    }
 }
 
+function validarDatos(){
+    const nombres = document.getElementById("apellidos").value 
+    const apellido = document.getElementById("nombres").value
+    if(nombres.length > 4 && apellido.length > 4){
+        return true
+    }
+    return false
+}
 
 
 
