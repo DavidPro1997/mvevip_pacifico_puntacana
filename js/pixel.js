@@ -35,3 +35,15 @@ function cargarPixel() {
     }
 }
 
+
+function verificarPixel() {
+    // Verifica si la función fbq está definida
+    if (typeof window.fbq !== 'undefined') {
+        console.log("El Pixel de Meta ya está cargado.");
+        return true; // El pixel ya está cargado
+    } else {
+        console.log("El Pixel de Meta NO está cargado.");
+        return false; // El pixel no está cargado
+    }
+}
+
